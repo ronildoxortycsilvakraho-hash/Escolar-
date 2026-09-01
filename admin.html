@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel administrativo — ITA Fast Food</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="container">
+    <a href="index.html" class="logo">ITA<span>Fast Food</span></a>
+    <nav class="nav-principal" id="navPrincipal">
+      <a href="index.html">Início</a>
+      <a href="cardapio.html">Cardápio</a>
+      <a href="admin.html" class="ativo">Painel admin</a>
+    </nav>
+    <div class="acoes-header">
+      <div id="areaUsuario"></div>
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<div id="bloqueioAcesso" class="container" style="padding:80px 24px; text-align:center; display:none;">
+  <h1>Acesso restrito</h1>
+  <p style="margin-top:12px; color:#6b5f55;">Esta área é exclusiva para administradores. Entre com uma conta de administrador para continuar.</p>
+  <a href="login.html" class="btn btn-primario mt-24">Entrar</a>
+</div>
+
+<main id="conteudoAdmin" style="display:none;">
+  <section class="cabecalho-admin">
+    <div class="container">
+      <h1>Painel administrativo</h1>
+      <p>Gerencie produtos, pedidos e cupons do ITA Fast Food.</p>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="abas-admin">
+      <button class="aba-admin ativo" data-aba="pedidos">📦 Pedidos</button>
+      <button class="aba-admin" data-aba="produtos">🍔 Produtos</button>
+      <button class="aba-admin" data-aba="cupons">🎟️ Cupons</button>
+    </div>
+
+    <!-- ABA PEDIDOS -->
+    <section class="painel-aba ativo" id="abaPedidos">
+      <div class="cartoes-resumo">
+        <div class="cartao-resumo"><span class="numero" id="totalPedidosResumo">0</span><span class="rotulo">Pedidos hoje</span></div>
+        <div class="cartao-resumo"><span class="numero" id="totalRecebidoResumo">0</span><span class="rotulo">Recebidos</span></div>
+        <div class="cartao-resumo"><span class="numero" id="totalPreparandoResumo">0</span><span class="rotulo">Preparando</span></div>
+        <div class="cartao-resumo"><span class="numero" id="totalEnviadoResumo">0</span><span class="rotulo">Enviados</span></div>
+      </div>
+      <div class="barra-ferramentas-admin">
+        <div class="filtros-status-pedido" id="filtrosStatusPedido">
+          <button class="filtro-status ativo" data-status="Todos">Todos</button>
+          <button class="filtro-status" data-status="Recebido">Recebido</button>
+          <button class="filtro-status" data-status="Preparando">Preparando</button>
+          <button class="filtro-status" data-status="Enviado">Enviado</button>
+          <button class="filtro-status" data-status="Entregue">Entregue</button>
+          <button class="filtro-status" data-status="Cancelado">Cancelado</button>
+        </div>
+        <input type="search" id="buscaPedidoAdmin" placeholder="Buscar por cliente ou nº do pedido...">
+      </div>
+      <div id="listaPedidosAdmin"></div>
+    </section>
+
+    <!-- ABA PRODUTOS -->
+    <section class="painel-aba" id="abaProdutos">
+      <div class="secao-cabecalho" style="margin-bottom:20px;">
+        <h2>Produtos</h2>
+        <button class="btn btn-primario" id="btnNovoProduto">+ Novo produto</button>
+      </div>
+      <div class="cartoes-resumo">
+        <div class="cartao-resumo"><span class="numero" id="totalProdutosResumo">0</span><span class="rotulo">Cadastrados</span></div>
+        <div class="cartao-resumo"><span class="numero" id="totalAtivosResumo">0</span><span class="rotulo">No cardápio</span></div>
+        <div class="cartao-resumo"><span class="numero" id="totalPausadosResumo">0</span><span class="rotulo">Pausados</span></div>
+      </div>
+      <div class="barra-ferramentas-admin">
+        <div class="filtros-status-pedido" id="filtrosCategoriaAdmin">
+          <button class="filtro-status ativo" data-categoria="Todos">Todos</button>
+          <button class="filtro-status" data-categoria="Lanches">🍔 Lanches</button>
+          <button class="filtro-status" data-categoria="Pizzas">🍕 Pizzas</button>
+          <button class="filtro-status" data-categoria="Porções">🍟 Porções</button>
+          <button class="filtro-status" data-categoria="Bebidas">🥤 Bebidas</button>
+          <button class="filtro-status" data-categoria="Sobremesas">🍨 Sobremesas</button>
+        </div>
+        <input type="search" id="buscaProdutoAdmin" placeholder="Buscar produto...">
+      </div>
+      <div id="listaProdutosAdmin" class="tabela-produtos"></div>
+    </section>
+
+    <!-- ABA CUPONS -->
+    <section class="painel-aba" id="abaCupons">
+      <div class="secao-cabecalho" style="margin-bottom:20px;">
+        <h2>Cupons de desconto</h2>
+        <button class="btn btn-primario" id="btnNovoCupom">+ Novo cupom</button>
+      </div>
+      <div id="listaCuponsAdmin" class="tabela-produtos"></div>
+    </section>
+  </div>
+</main>
+
+<!-- Modal produto -->
+<div class="modal-overlay" id="modalProduto">
+  <div class="modal-caixa">
+    <div class="modal-cabecalho">
+      <h2 id="tituloModalProduto">Novo produto</h2>
+      <button class="fechar-modal" data-fechar="modalProduto">×</button>
+    </div>
+    <form id="formProduto">
+      <input type="hidden" id="produtoId">
+      <div class="campo">
+        <label>Nome</label>
+        <input type="text" id="produtoNome" required>
+      </div>
+      <div class="campo">
+        <label>Descrição</label>
+        <textarea id="produtoDescricao" rows="2"></textarea>
+      </div>
+      <div class="campo">
+        <label>Categoria</label>
+        <select id="produtoCategoria" required>
+          <option value="Lanches">🍔 Lanches</option>
+          <option value="Pizzas">🍕 Pizzas</option>
+          <option value="Porções">🍟 Porções</option>
+          <option value="Bebidas">🥤 Bebidas</option>
+          <option value="Sobremesas">🍨 Sobremesas</option>
+        </select>
+      </div>
+      <div class="campo">
+        <label>Preço (R$)</label>
+        <input type="number" id="produtoPreco" step="0.01" min="0" required>
+      </div>
+      <div class="campo">
+        <label>Emoji / ícone do produto</label>
+        <input type="text" id="produtoEmoji" maxlength="4" placeholder="🍔">
+      </div>
+      <div class="campo">
+        <label><input type="checkbox" id="produtoDisponivel" checked style="width:auto; margin-right:8px;">Disponível no cardápio</label>
+      </div>
+      <div class="campo" id="campoMotivoIndisponivel" style="display:none;">
+        <label>O que está faltando? (aparece para o cliente)</label>
+        <input type="text" id="produtoMotivo" placeholder="ex: Sem pão hoje / Voltamos amanhã">
+      </div>
+      <button type="submit" class="btn btn-primario btn-bloco">Salvar produto</button>
+    </form>
+  </div>
+</div>
+
+<!-- Modal cupom -->
+<div class="modal-overlay" id="modalCupom">
+  <div class="modal-caixa">
+    <div class="modal-cabecalho">
+      <h2>Novo cupom</h2>
+      <button class="fechar-modal" data-fechar="modalCupom">×</button>
+    </div>
+    <form id="formCupom">
+      <div class="campo">
+        <label>Código</label>
+        <input type="text" id="cupomCodigo" required placeholder="ex: BEMVINDO10" style="text-transform:uppercase;">
+      </div>
+      <div class="campo">
+        <label>Desconto (%)</label>
+        <input type="number" id="cupomDesconto" min="1" max="100" required>
+      </div>
+      <div class="campo">
+        <label><input type="checkbox" id="cupomAtivo" checked style="width:auto; margin-right:8px;">Cupom ativo</label>
+      </div>
+      <button type="submit" class="btn btn-primario btn-bloco">Salvar cupom</button>
+    </form>
+  </div>
+</div>
+
+<script type="module" src="js/firebase.js"></script>
+<script type="module" src="js/admin.js"></script>
+</body>
+</html>

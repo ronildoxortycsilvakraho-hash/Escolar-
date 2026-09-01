@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Criar conta — ITA Fast Food</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="container">
+    <a href="index.html" class="logo">ITA<span>Fast Food</span></a>
+    <nav class="nav-principal" id="navPrincipal">
+      <a href="index.html">Início</a>
+      <a href="cardapio.html">Cardápio</a>
+      <a href="pedido.html">Meus pedidos</a>
+    </nav>
+    <div class="acoes-header">
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<main class="pagina-auth">
+  <div class="cartao-auth">
+    <h1>Criar conta</h1>
+    <p class="subtitulo">Leva menos de um minuto — e você já pode pedir.</p>
+
+    <div class="mensagem-erro" id="mensagemErro"></div>
+
+    <form id="formCadastro">
+      <div class="campo">
+        <label for="nome">Nome completo</label>
+        <input type="text" id="nome" required placeholder="Seu nome">
+      </div>
+      <div class="campo">
+        <label for="telefone">Telefone / WhatsApp</label>
+        <input type="tel" id="telefone" required placeholder="(63) 90000-0000">
+      </div>
+      <div class="campo">
+        <label for="endereco">Endereço de entrega</label>
+        <input type="text" id="endereco" required placeholder="Rua, número, bairro">
+      </div>
+      <div class="campo">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" required placeholder="voce@email.com">
+      </div>
+      <div class="campo">
+        <label for="senha">Senha</label>
+        <input type="password" id="senha" required minlength="6" placeholder="Mínimo 6 caracteres">
+      </div>
+      <button type="submit" class="btn btn-primario btn-bloco" id="btnCadastrar">Criar conta</button>
+    </form>
+
+    <p class="link-alternativo">Já tem conta? <a href="login.html">Entrar</a></p>
+  </div>
+</main>
+
+<script type="module" src="js/firebase.js"></script>
+<script type="module" src="js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meu pedido — ITA Fast Food</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .layout-pedido {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+  @media (max-width: 900px) { .layout-pedido { grid-template-columns: 1fr; } }
+
+  .bloco {
+    background: var(--branco);
+    border: 3px solid var(--carvao);
+    box-shadow: var(--sombra-cartao);
+    padding: 28px;
+    margin-bottom: 24px;
+  }
+  .bloco h2 { font-size: 1.4rem; margin-bottom: 16px; }
+  .linha-cupom { display: flex; gap: 10px; }
+  .linha-cupom input { flex: 1; }
+  .resumo-linha { display: flex; justify-content: space-between; padding: 6px 0; font-size: 0.95rem; }
+  .resumo-linha.total { font-weight: 800; font-size: 1.2rem; border-top: 2px solid var(--carvao); margin-top: 10px; padding-top: 14px; }
+  .desconto { color: var(--verde); }
+
+  .trilha-status {
+    display: flex;
+    justify-content: space-between;
+    margin: 24px 0 8px;
+    position: relative;
+  }
+  .trilha-status::before {
+    content: '';
+    position: absolute;
+    top: 17px; left: 0; right: 0;
+    height: 4px;
+    background: var(--creme-escuro);
+    z-index: 0;
+  }
+  .etapa-status {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    text-align: center;
+  }
+  .etapa-status .bola {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--creme-escuro);
+    border: 3px solid var(--carvao);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800;
+  }
+  .etapa-status.concluida .bola { background: var(--verde); color: white; border-color: var(--verde); }
+  .etapa-status span.rotulo { font-size: 0.78rem; font-weight: 700; }
+
+  .cartao-pedido-hist {
+    border: 2px solid var(--creme-escuro);
+    padding: 16px;
+    margin-bottom: 14px;
+  }
+  .cartao-pedido-hist .cabecalho-pedido { display:flex; justify-content:space-between; align-items:center; margin-bottom: 8px; }
+  .etiqueta-status {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 800;
+    background: var(--mostarda);
+    color: var(--carvao);
+  }
+  .etiqueta-status.cancelado { background: #8a8a8a; color: white; }
+  .etiqueta-status.entregue { background: var(--verde); color: white; }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="container">
+    <a href="index.html" class="logo">ITA<span>Fast Food</span></a>
+    <nav class="nav-principal" id="navPrincipal">
+      <a href="index.html">Início</a>
+      <a href="cardapio.html">Cardápio</a>
+      <a href="pedido.html" class="ativo">Meus pedidos</a>
+      <a href="admin.html" class="somente-admin">Painel admin</a>
+    </nav>
+    <div class="acoes-header">
+      <div id="areaUsuario"></div>
+      <button class="btn-carrinho" id="abrirCarrinho" aria-label="Abrir carrinho">
+        🛒 <span class="contador-carrinho" id="contadorCarrinho">0</span>
+      </button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<section class="secao">
+  <div class="container">
+    <h1 class="mt-24" style="margin-bottom:24px;">Finalizar pedido</h1>
+
+    <div id="avisoLogin" class="mensagem-erro visivel" style="display:none;">
+      Você precisa <a href="login.html" style="text-decoration:underline;">entrar na sua conta</a> para finalizar um pedido.
+    </div>
+
+    <div class="layout-pedido" id="layoutPedido">
+      <div>
+        <div class="bloco" id="blocoCarrinhoResumo">
+          <h2>Itens do carrinho</h2>
+          <div id="resumoItensPedido"></div>
+        </div>
+
+        <div class="bloco">
+          <h2>Cupom de desconto</h2>
+          <div class="linha-cupom">
+            <input type="text" id="inputCupom" placeholder="Digite o código do cupom">
+            <button class="btn btn-secundario" id="btnAplicarCupom">Aplicar</button>
+          </div>
+          <p id="mensagemCupom" style="margin-top:10px; font-size:0.88rem;"></p>
+        </div>
+
+        <div class="bloco">
+          <h2>Endereço de entrega</h2>
+          <div class="campo">
+            <input type="text" id="enderecoPedido" placeholder="Rua, número, bairro">
+          </div>
+          <div class="campo">
+            <input type="text" id="telefonePedido" placeholder="Telefone para contato">
+          </div>
+          <div class="campo">
+            <textarea id="obsPedido" rows="3" placeholder="Observações (opcional)"></textarea>
+          </div>
+        </div>
+
+        <div class="bloco">
+          <div class="resumo-linha"><span>Subtotal</span><span id="subtotalPedido">R$ 0,00</span></div>
+          <div class="resumo-linha desconto" id="linhaDesconto" style="display:none;"><span>Desconto</span><span id="valorDesconto">- R$ 0,00</span></div>
+          <div class="resumo-linha total"><span>Total</span><span id="totalPedido">R$ 0,00</span></div>
+          <button class="btn btn-primario btn-bloco mt-24" id="btnConfirmarPedido">Confirmar pedido</button>
+        </div>
+      </div>
+
+      <div>
+        <div class="bloco">
+          <h2>Acompanhar pedido</h2>
+          <p style="color:#6b5f55; font-size:0.9rem;">Assim que você confirmar, o status do seu pedido mais recente aparece aqui em tempo real.</p>
+          <div id="acompanhamentoPedido"></div>
+        </div>
+
+        <div class="bloco">
+          <h2>Histórico de pedidos</h2>
+          <div id="historicoPedidos"><p style="color:#a0948a;">Nenhum pedido ainda.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="overlay-carrinho" id="overlayCarrinho"></div>
+<aside class="painel-carrinho" id="painelCarrinho">
+  <div class="cabecalho-carrinho">
+    <h2>Seu carrinho</h2>
+    <button class="fechar-carrinho" id="fecharCarrinho">×</button>
+  </div>
+  <div class="itens-carrinho" id="itensCarrinho"></div>
+  <div class="rodape-carrinho">
+    <div class="linha-total"><span>Total</span><span id="totalCarrinho">R$ 0,00</span></div>
+    <a href="pedido.html" class="btn btn-primario btn-bloco">Finalizar pedido</a>
+  </div>
+</aside>
+
+<script type="module" src="js/firebase.js"></script>
+<script type="module" src="js/carrinho.js"></script>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cardápio — ITA Fast Food</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/cardapio.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="container">
+    <a href="index.html" class="logo">ITA<span>Fast Food</span></a>
+    <nav class="nav-principal" id="navPrincipal">
+      <a href="index.html">Início</a>
+      <a href="cardapio.html" class="ativo">Cardápio</a>
+      <a href="pedido.html">Meus pedidos</a>
+      <a href="admin.html" class="somente-admin">Painel admin</a>
+    </nav>
+    <div class="acoes-header">
+      <div id="areaUsuario"></div>
+      <button class="btn-carrinho" id="abrirCarrinho" aria-label="Abrir carrinho">
+        🛒 <span class="contador-carrinho" id="contadorCarrinho">0</span>
+      </button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<section class="cabecalho-cardapio">
+  <div class="container">
+    <h1>Cardápio</h1>
+    <p>Tudo fresquinho e feito na hora do seu pedido.</p>
+  </div>
+</section>
+
+<section class="secao" style="padding-top:32px;">
+  <div class="container">
+    <div class="campo" style="max-width:320px; margin-bottom:24px;">
+      <input type="search" id="buscaProduto" placeholder="Buscar no cardápio...">
+    </div>
+    <div class="filtros-categoria" id="filtrosCategoria">
+      <button class="filtro-cat ativo" data-categoria="Todos">Todos</button>
+      <button class="filtro-cat" data-categoria="Lanches">🍔 Lanches</button>
+      <button class="filtro-cat" data-categoria="Pizzas">🍕 Pizzas</button>
+      <button class="filtro-cat" data-categoria="Porções">🍟 Porções</button>
+      <button class="filtro-cat" data-categoria="Bebidas">🥤 Bebidas</button>
+      <button class="filtro-cat" data-categoria="Sobremesas">🍨 Sobremesas</button>
+    </div>
+
+    <div class="grade-produtos mt-24" id="listaProdutos">
+      <p>Carregando cardápio...</p>
+    </div>
+  </div>
+</section>
+
+<footer class="rodape">
+  <div class="container">
+    <div>
+      <a href="index.html" class="logo">ITA<span>Fast Food</span></a>
+      <p style="margin-top:12px; max-width:38ch; font-size:0.9rem;">O melhor fast food da região, feito na hora e entregue com carinho.</p>
+    </div>
+    <div>
+      <h4>Navegação</h4>
+      <ul>
+        <li><a href="cardapio.html">Cardápio</a></li>
+        <li><a href="login.html">Entrar</a></li>
+        <li><a href="cadastro.html">Criar conta</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contato</h4>
+      <ul>
+        <li>(63) 99999-0000</li>
+        <li>contato@itafastfood.com.br</li>
+      </ul>
+    </div>
+  </div>
+  <div class="base container">© 2026 ITA Fast Food. Todos os direitos reservados.</div>
+</footer>
+
+<div class="overlay-carrinho" id="overlayCarrinho"></div>
+<aside class="painel-carrinho" id="painelCarrinho">
+  <div class="cabecalho-carrinho">
+    <h2>Seu carrinho</h2>
+    <button class="fechar-carrinho" id="fecharCarrinho">×</button>
+  </div>
+  <div class="itens-carrinho" id="itensCarrinho"></div>
+  <div class="rodape-carrinho">
+    <div class="linha-total"><span>Total</span><span id="totalCarrinho">R$ 0,00</span></div>
+    <a href="pedido.html" class="btn btn-primario btn-bloco">Finalizar pedido</a>
+  </div>
+</aside>
+
+<script type="module" src="js/firebase.js"></script>
+<script type="module" src="js/carrinho.js"></script>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

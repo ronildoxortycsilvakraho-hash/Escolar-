@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ITA Fast Food — Peça já o seu lanche</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="container">
+    <a href="index.html" class="logo">ITA<span>Fast Food</span></a>
+    <nav class="nav-principal" id="navPrincipal">
+      <a href="index.html" class="ativo">Início</a>
+      <a href="cardapio.html">Cardápio</a>
+      <a href="pedido.html">Meus pedidos</a>
+      <a href="admin.html" class="somente-admin">Painel admin</a>
+    </nav>
+    <div class="acoes-header">
+      <div id="areaUsuario"></div>
+      <button class="btn-carrinho" id="abrirCarrinho" aria-label="Abrir carrinho">
+        🛒 <span class="contador-carrinho" id="contadorCarrinho">0</span>
+      </button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <div>
+      <span class="hero-etiqueta">Entrega em tempo real</span>
+      <h1>Fome não<br><span class="destaque">espera.</span><br>Seu lanche também não.</h1>
+      <p>Hambúrgueres suculentos, pizzas no capricho e as batatas mais crocantes da cidade — pedidos pelo site e acompanhados em tempo real, direto até a sua porta.</p>
+      <div class="hero-acoes">
+        <a href="cardapio.html" class="btn btn-primario">Ver cardápio</a>
+        <a href="cadastro.html" class="btn btn-secundario" style="border-color:var(--creme); color:var(--creme);">Criar conta</a>
+      </div>
+    </div>
+    <div class="hero-arte">🍔</div>
+  </div>
+</section>
+
+<div class="faixa-destaques">
+  <div class="container">
+    <span>🔥 Lançamento: Combo Duplo Bacon</span>
+    <span>🏍️ Entrega rápida</span>
+    <span>🎟️ Cupons toda semana</span>
+    <span>⭐ Avaliação 4.8/5</span>
+  </div>
+</div>
+
+<section class="secao">
+  <div class="container">
+    <div class="secao-cabecalho">
+      <div>
+        <h2>Categorias</h2>
+        <p>Escolha o que bate a fome hoje. Tudo fresquinho, feito na hora do seu pedido.</p>
+      </div>
+      <a href="cardapio.html" class="btn btn-secundario">Ver cardápio completo</a>
+    </div>
+    <div class="grade-categorias" id="listaCategorias">
+      <a href="cardapio.html?categoria=Lanches" class="cartao-categoria">
+        <div class="icone">🍔</div>
+        <h3>Lanches</h3>
+      </a>
+      <a href="cardapio.html?categoria=Pizzas" class="cartao-categoria">
+        <div class="icone">🍕</div>
+        <h3>Pizzas</h3>
+      </a>
+      <a href="cardapio.html?categoria=Porções" class="cartao-categoria">
+        <div class="icone">🍟</div>
+        <h3>Porções</h3>
+      </a>
+      <a href="cardapio.html?categoria=Bebidas" class="cartao-categoria">
+        <div class="icone">🥤</div>
+        <h3>Bebidas</h3>
+      </a>
+      <a href="cardapio.html?categoria=Sobremesas" class="cartao-categoria">
+        <div class="icone">🍨</div>
+        <h3>Sobremesas</h3>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="secao" style="background:var(--creme-escuro);">
+  <div class="container">
+    <div class="secao-cabecalho">
+      <div>
+        <h2>Mais pedidos da semana</h2>
+        <p>Os favoritos de quem já provou.</p>
+      </div>
+    </div>
+    <div class="grade-produtos" id="listaDestaques">
+      <p>Carregando destaques...</p>
+    </div>
+  </div>
+</section>
+
+<section class="secao">
+  <div class="container">
+    <div class="secao-cabecalho">
+      <div>
+        <h2>Como funciona</h2>
+        <p>Do pedido até a porta da sua casa, em quatro passos simples.</p>
+      </div>
+    </div>
+    <div class="passos">
+      <div class="passo">
+        <span class="numero">01</span>
+        <h3>Monte seu pedido</h3>
+        <p>Escolha os itens no cardápio e adicione ao carrinho.</p>
+      </div>
+      <div class="passo">
+        <span class="numero">02</span>
+        <h3>Finalize com cupom</h3>
+        <p>Aplique um cupom de desconto, se tiver, e confirme o endereço.</p>
+      </div>
+      <div class="passo">
+        <span class="numero">03</span>
+        <h3>Acompanhe em tempo real</h3>
+        <p>Veja o status mudar: Recebido → Preparando → Enviado → Entregue.</p>
+      </div>
+      <div class="passo">
+        <span class="numero">04</span>
+        <h3>Aproveite</h3>
+        <p>Seu pedido chega quentinho, do jeitinho que você escolheu.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="rodape">
+  <div class="container">
+    <div>
+      <a href="index.html" class="logo">ITA<span>Fast Food</span></a>
+      <p style="margin-top:12px; max-width:38ch; font-size:0.9rem;">O melhor fast food da região, feito na hora e entregue com carinho.</p>
+    </div>
+    <div>
+      <h4>Navegação</h4>
+      <ul>
+        <li><a href="cardapio.html">Cardápio</a></li>
+        <li><a href="login.html">Entrar</a></li>
+        <li><a href="cadastro.html">Criar conta</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contato</h4>
+      <ul>
+        <li>(63) 99999-0000</li>
+        <li>contato@itafastfood.com.br</li>
+        <li>Ter a Dom, 18h às 23h30</li>
+      </ul>
+    </div>
+  </div>
+  <div class="base container">© 2026 ITA Fast Food. Todos os direitos reservados.</div>
+</footer>
+
+<!-- Carrinho lateral -->
+<div class="overlay-carrinho" id="overlayCarrinho"></div>
+<aside class="painel-carrinho" id="painelCarrinho">
+  <div class="cabecalho-carrinho">
+    <h2>Seu carrinho</h2>
+    <button class="fechar-carrinho" id="fecharCarrinho">×</button>
+  </div>
+  <div class="itens-carrinho" id="itensCarrinho"></div>
+  <div class="rodape-carrinho">
+    <div class="linha-total"><span>Total</span><span id="totalCarrinho">R$ 0,00</span></div>
+    <a href="pedido.html" class="btn btn-primario btn-bloco">Finalizar pedido</a>
+  </div>
+</aside>
+
+<script type="module" src="js/firebase.js"></script>
+<script type="module" src="js/carrinho.js"></script>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

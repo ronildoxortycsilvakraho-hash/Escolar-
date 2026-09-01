@@ -1,0 +1,28 @@
+.cabecalho-cardapio {
+  background: var(--vermelho);
+  color: var(--branco);
+  padding: 48px 0 36px;
+}
+.cabecalho-cardapio h1 { font-size: clamp(2rem, 4vw, 2.8rem); }
+.cabecalho-cardapio p { margin-top: 8px; color: #ffe3e3; }
+
+.filtros-categoria {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.filtro-cat {
+  background: var(--branco);
+  border: 2px solid var(--carvao);
+  padding: 10px 18px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  border-radius: 999px;
+}
+.filtro-cat.ativo,
+.filtro-cat:hover {
+  background: var(--carvao);
+  color: var(--creme);
+}
+
+.item-indisponivel { opacity: 0.55; }

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entrar — ITA Fast Food</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="container">
+    <a href="index.html" class="logo">ITA<span>Fast Food</span></a>
+    <nav class="nav-principal" id="navPrincipal">
+      <a href="index.html">Início</a>
+      <a href="cardapio.html">Cardápio</a>
+      <a href="pedido.html">Meus pedidos</a>
+    </nav>
+    <div class="acoes-header">
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<main class="pagina-auth">
+  <div class="cartao-auth">
+    <h1>Bem-vindo de volta</h1>
+    <p class="subtitulo">Entre para acompanhar seus pedidos em tempo real.</p>
+
+    <div class="mensagem-erro" id="mensagemErro"></div>
+
+    <form id="formLogin">
+      <div class="campo">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" required placeholder="voce@email.com">
+      </div>
+      <div class="campo">
+        <label for="senha">Senha</label>
+        <input type="password" id="senha" required placeholder="••••••••">
+      </div>
+      <button type="submit" class="btn btn-primario btn-bloco" id="btnEntrar">Entrar</button>
+    </form>
+
+    <p class="link-alternativo">Ainda não tem conta? <a href="cadastro.html">Cadastre-se</a></p>
+  </div>
+</main>
+
+<script type="module" src="js/firebase.js"></script>
+<script type="module" src="js/auth.js"></script>
+</body>
+</html>
